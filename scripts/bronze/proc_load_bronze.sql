@@ -1,3 +1,22 @@
+/*
+===============================================================================
+Stored Procedure: Load Bronze Layer (Source -> Bronze)
+===============================================================================
+Script Purpose:
+    This stored procedure loads data into the 'bronze' schema from external CSV files. 
+    It performs the following actions:
+    - Truncates the bronze tables before loading data.
+    - Uses the `copy` command to load data from csv Files to bronze tables.
+
+Parameters:
+    None. 
+	  This stored procedure does not accept any parameters or return any values.
+
+Usage Example:
+    CALL bronze.load_bronze();
+===============================================================================
+*/
+
 CREATE OR REPLACE PROCEDURE bronze.load_bronze()
 LANGUAGE plpgsql
 AS $$
@@ -8,7 +27,7 @@ DECLARE
     batch_end_time TIMESTAMP;
     load_duration INTERVAL;
     total_duration INTERVAL;
-    base_path TEXT := 'C:/Users/admin/Desktop/projects/johnajayi/data_engineering/sql-data-warehouse-project/datasets';
+    base_path TEXT := 'C:/pgsql-datasets/datawarehouse-project/';
 BEGIN
     BEGIN
         batch_start_time := clock_timestamp();
